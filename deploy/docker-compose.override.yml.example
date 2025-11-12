@@ -1,0 +1,28 @@
+# docker-compose.override.yml.example
+# Copy this file to docker-compose.override.yml for local development
+# This file is automatically used by docker-compose if present
+
+version: '3.8'
+
+services:
+  api:
+    # Enable debug mode
+    environment:
+      - DEBUG=1
+    # Mount source code for hot reload
+    volumes:
+      - ../backend:/app
+    # Override command for development
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload --log-level debug
+
+  worker:
+    volumes:
+      - ../backend:/app
+    environment:
+      - DEBUG=1
+
+  beat:
+    volumes:
+      - ../backend:/app
+    environment:
+      - DEBUG=1

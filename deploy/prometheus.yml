@@ -1,0 +1,45 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'vigil-monitor'
+
+# Alertmanager configuration (optional)
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets:
+#           - alertmanager:9093
+
+# Rule files (optional)
+# rule_files:
+#   - "alert_rules.yml"
+
+scrape_configs:
+  # Scrape Vigil API metrics
+  - job_name: 'vigil-api'
+    static_configs:
+      - targets: ['api:8000']
+        labels:
+          service: 'vigil-api'
+
+  # Scrape Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Example: Node Exporter (for monitoring Linux servers)
+  # Uncomment and configure to monitor your actual servers
+  # - job_name: 'node-exporter'
+  #   static_configs:
+  #     - targets:
+  #       - 'server1.example.com:9100'
+  #       - 'server2.example.com:9100'
+  #       labels:
+  #         env: 'production'
+
+  # Example: Docker containers monitoring
+  # - job_name: 'cadvisor'
+  #   static_configs:
+  #     - targets:
+  #       - 'cadvisor:8080'
