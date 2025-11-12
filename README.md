@@ -1,4 +1,4 @@
-# Vigil - DevOps Monitoring Backend
+# Sentinel - DevOps Monitoring Backend
 
 A production-ready FastAPI application for monitoring servers and containers using the Prometheus API.
 
